@@ -13,7 +13,7 @@ function Enter() {
     setMethod('phone');
   };
   return (
-    <div className='mt-16'>
+    <div className='mt-16 px-4'>
       <h3 className='text-center text-3xl font-bold'>Enter to Carrot</h3>
       <div className='mt-8'>
         <div className='flex flex-col items-center'>
@@ -43,34 +43,49 @@ function Enter() {
             </button>
           </div>
         </div>
-        <form>
-          <label>
+        <form className='mt-8 flex flex-col'>
+          <label className='text-sm font-medium text-gray-700'>
             {method === 'email' && 'Email address'}
             {method === 'phone' && 'Phone number'}
           </label>
-          <div>
-            {method === 'email' && <input type='email' required />}
+          <div className='mt-1'>
+            {method === 'email' && (
+              <input
+                type='email'
+                className='w-full rounded-md border-gray-300 px-3 py-2 placeholder-gray-300 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500'
+                placeholder='Please input your email address'
+                required
+              />
+            )}
             {method === 'phone' && (
-              <div>
-                <span>+82</span>
-                <input type='number' required />
+              <div className='flex rounded-md shadow-sm'>
+                <span className='flex select-none items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500'>
+                  +82
+                </span>
+                <input
+                  type='number'
+                  className='w-full rounded-r-md border-gray-300 px-3 py-2 placeholder-gray-300 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500'
+                  required
+                />
               </div>
             )}
           </div>
-          <button>
+          <button className='mt-4 rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'>
             {method === 'email' && 'Get login link'}
             {method === 'phone' && 'Get one-time password'}
           </button>
         </form>
-        <div>
-          <div>
-            <div />
-            <div>
-              <span>Or enter with</span>
+        <div className='mt-8'>
+          <div className='relative'>
+            <div className='border-gran-300 absolute w-full border-t' />
+            <div className='relative -top-3 text-center'>
+              <span className='bg-white px-2 text-sm text-gray-500'>
+                Or enter with
+              </span>
             </div>
           </div>
-          <div>
-            <button>
+          <div className='mt-2 grid grid-cols-2 gap-3'>
+            <button className='flex items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-600 shadow-sm hover:bg-gray-100'>
               <svg
                 className='h-5 w-5'
                 aria-hidden='true'
@@ -80,7 +95,7 @@ function Enter() {
                 <path d='M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84' />
               </svg>
             </button>
-            <button>
+            <button className='flex items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-600 shadow-sm hover:bg-gray-100'>
               <svg
                 className='h-5 w-5'
                 aria-hidden='true'
