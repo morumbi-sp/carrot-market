@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+const cls = (...classElements: string[]) => {
+  return classElements.join(' ');
+};
+
 function Enter() {
   const [method, setMethod] = useState<'email' | 'phone'>('email');
   const onEmailClick = () => {
@@ -9,14 +13,34 @@ function Enter() {
     setMethod('phone');
   };
   return (
-    <div>
-      <h3>Enter to Carrot</h3>
-      <div>
-        <div>
-          <h5>Enter using:</h5>
-          <div>
-            <button onClick={onEmailClick}>Email address</button>
-            <button onClick={onPhoneClick}>Phone number</button>
+    <div className='mt-16'>
+      <h3 className='text-center text-3xl font-bold'>Enter to Carrot</h3>
+      <div className='mt-8'>
+        <div className='flex flex-col items-center'>
+          <h5 className='text-sm text-gray-500'>Enter using:</h5>
+          <div className='mt-8 grid w-full grid-cols-2 gap-16 border-b'>
+            <button
+              className={cls(
+                'border-b-2 pb-4 font-medium',
+                method === 'email'
+                  ? ' border-orange-500 text-orange-500'
+                  : 'border-transparent'
+              )}
+              onClick={onEmailClick}
+            >
+              Email address
+            </button>
+            <button
+              className={cls(
+                'border-b-2 pb-4 font-medium',
+                method === 'phone'
+                  ? ' border-orange-500 text-orange-500'
+                  : 'border-transparent'
+              )}
+              onClick={onPhoneClick}
+            >
+              Phone number
+            </button>
           </div>
         </div>
         <form>
