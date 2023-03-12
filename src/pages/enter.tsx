@@ -38,13 +38,14 @@ function EnterJ() {
           </div>
         </div>
         <form className='mt-7'>
-          <label className='text-sm font-medium'>
+          <label htmlFor='input' className='text-sm font-medium'>
             {method === 'email' && 'Email address'}
             {method === 'phone' && 'Phone number'}
           </label>
           <div>
             {method === 'email' && (
               <input
+                id='input'
                 className=' mt-1 w-full rounded-md border-gray-300 placeholder:text-gray-300 focus:border-orange-500 focus:ring-orange-500'
                 type='text'
                 placeholder='Please input your email address'
@@ -57,6 +58,7 @@ function EnterJ() {
                   +82
                 </span>
                 <input
+                  id='input'
                   className='w-full rounded-r-md border-gray-300 placeholder:text-gray-400 focus:border-orange-500 focus:ring-orange-500'
                   type='number'
                   placeholder='Please input your phone number'
