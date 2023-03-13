@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 const Upload: NextPage = () => {
   return (
-    <div className='px-4 py-16'>
+    <div className='space-y-5 px-4 py-16'>
       <div>
         <label
           className='flex h-48 items-center justify-center rounded-md border-2 border-dashed border-gray-300 text-gray-600 hover:border-orange-400 hover:text-orange-400'
@@ -25,7 +25,7 @@ const Upload: NextPage = () => {
         </label>
         <input className='hidden' type='file' id='addPic' />
       </div>
-      <div className='mt-5'>
+      <div>
         <label
           className='block text-sm font-medium text-gray-700'
           htmlFor='priceInput'
@@ -51,7 +51,7 @@ const Upload: NextPage = () => {
       </div>
       <div>
         <label
-          className='mt-5 block text-sm font-medium text-gray-700'
+          className='block text-sm font-medium text-gray-700'
           htmlFor='descriptionInput'
         >
           Description
@@ -63,7 +63,7 @@ const Upload: NextPage = () => {
           rows={4}
         ></textarea>
       </div>
-      <button className='mt-5 w-full rounded-md border   bg-orange-500 py-2 text-sm font-medium text-white ring-orange-600 ring-offset-2 hover:bg-orange-600 focus:ring-2'>
+      <button className=' w-full rounded-md border   bg-orange-500 py-2 text-sm font-medium text-white ring-orange-600 ring-offset-2 hover:bg-orange-600 focus:ring-2'>
         Upload product
       </button>
     </div>
