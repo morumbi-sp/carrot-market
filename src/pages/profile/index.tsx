@@ -1,4 +1,6 @@
-function Profile() {
+import { NextPage } from 'next';
+
+const Profile: NextPage = () => {
   return (
     <div className='py-10 px-4'>
       <div className='flex items-center space-x-3'>
@@ -132,6 +134,6 @@ function Profile() {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;

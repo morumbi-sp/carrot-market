@@ -1,10 +1,11 @@
+import { NextPage } from 'next';
 import { useState } from 'react';
 
 const cls = (...classes: string[]) => {
   return classes.join(' ');
 };
 
-function EnterJ() {
+const EnterJ: NextPage = () => {
   const [method, setMethod] = useState<'email' | 'phone'>('email');
   return (
     <div className='mt-16 px-4'>
@@ -107,6 +108,6 @@ function EnterJ() {
       </div>
     </div>
   );
-}
+};
 
 export default EnterJ;

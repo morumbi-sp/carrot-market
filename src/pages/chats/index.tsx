@@ -1,4 +1,6 @@
-function Chat() {
+import { NextPage } from 'next';
+
+const Chat: NextPage = () => {
   return (
     <div className='divide-y py-10'>
       {[1, 1, 1, 1, 1].map((_, i) => (
@@ -16,6 +18,6 @@ function Chat() {
       ))}
     </div>
   );
-}
+};
 
 export default Chat;

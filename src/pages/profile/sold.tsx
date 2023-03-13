@@ -1,4 +1,6 @@
-function Sold() {
+import { NextPage } from 'next';
+
+const Sold: NextPage = () => {
   return (
     <div className='flex flex-col py-5'>
       {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, idx) => (
@@ -58,6 +60,6 @@ function Sold() {
       ))}
     </div>
   );
-}
+};
 
 export default Sold;

@@ -1,4 +1,6 @@
-function Items() {
+import { NextPage } from 'next';
+
+const Items: NextPage = () => {
   return (
     <div className='py-10 px-4'>
       <div>
@@ -66,6 +68,6 @@ function Items() {
       </div>
     </div>
   );
-}
+};
 
 export default Items;

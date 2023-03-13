@@ -1,4 +1,6 @@
-function Home() {
+import { NextPage } from 'next';
+
+const Home: NextPage = () => {
   return (
     <div className='flex flex-col py-5'>
       {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, idx) => (
@@ -74,6 +76,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

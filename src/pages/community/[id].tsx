@@ -1,4 +1,6 @@
-function CommunityDetails() {
+import { NextPage } from 'next';
+
+const CommunityDetails: NextPage = () => {
   return (
     <div className='py-2'>
       <div className='px-4'>
@@ -94,6 +96,6 @@ function CommunityDetails() {
       </div>
     </div>
   );
-}
+};
 
 export default CommunityDetails;

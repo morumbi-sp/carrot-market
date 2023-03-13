@@ -1,4 +1,6 @@
-function ChatDetail() {
+import { NextPage } from 'next';
+
+const ChatDetail: NextPage = () => {
   return (
     <div className='px-4 pt-10'>
       <div className='space-y-4'>
@@ -125,6 +127,6 @@ function ChatDetail() {
       </div>
     </div>
   );
-}
+};
 
 export default ChatDetail;

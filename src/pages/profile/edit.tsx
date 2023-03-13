@@ -1,4 +1,6 @@
-function EditProfile() {
+import { NextPage } from 'next';
+
+const EditProfile: NextPage = () => {
   return (
     <div className='space-y-4 px-4 py-10'>
       <div className='flex items-center space-x-4'>
@@ -56,6 +58,6 @@ function EditProfile() {
       </div>
     </div>
   );
-}
+};
 
 export default EditProfile;

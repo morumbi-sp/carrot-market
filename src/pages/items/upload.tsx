@@ -1,4 +1,6 @@
-function Upload() {
+import { NextPage } from 'next';
+
+const Upload: NextPage = () => {
   return (
     <div className='px-4 py-16'>
       <div>
@@ -66,6 +68,6 @@ function Upload() {
       </button>
     </div>
   );
-}
+};
 
 export default Upload;

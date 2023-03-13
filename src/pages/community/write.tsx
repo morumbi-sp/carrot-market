@@ -1,4 +1,6 @@
-function Write() {
+import { NextPage } from 'next';
+
+const Write: NextPage = () => {
   return (
     <form className='mt-5 flex flex-col px-4'>
       <textarea
@@ -11,6 +13,6 @@ function Write() {
       </button>
     </form>
   );
-}
+};
 
 export default Write;
