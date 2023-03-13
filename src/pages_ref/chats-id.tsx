@@ -146,7 +146,7 @@ function ChatDetails() {
         </div>
       </div>
       <div className='fixed inset-x-0 bottom-0  bg-white py-2'>
-        <div className='relative mx-auto flex w-full  max-w-md items-center'>
+        <div className='relative mx-auto flex w-full max-w-md items-center'>
           <input
             type='text'
             className='w-full rounded-full border-gray-300 pr-12 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500'
