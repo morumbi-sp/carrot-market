@@ -1,12 +1,14 @@
 import Layout from '@/components/layout';
 import { NextPage } from 'next';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
     <Layout title='Home' hasTabBar>
-      <div className='flex flex-col'>
+      <div className=' flex flex-col'>
         {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, idx) => (
-          <div
+          <Link
+            href={`/items/${idx}`}
             className='flex cursor-pointer justify-between border-b py-5 px-4'
             key={idx}
           >
@@ -58,7 +60,7 @@ const Home: NextPage = () => {
                 <span>1</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
         <div className='fixed bottom-24 right-6 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-orange-400 text-white shadow-lg transition-colors hover:bg-orange-500 '>
           <svg
