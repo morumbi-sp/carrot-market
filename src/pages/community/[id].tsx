@@ -1,18 +1,19 @@
 import Button from '@/components/button';
 import Layout from '@/components/layout';
+import Textarea from '@/components/textarea';
 import { NextPage } from 'next';
 
 const CommunityDetails: NextPage = () => {
   return (
     <Layout canGoBack>
       <div className='px-4'>
-        <span className=' inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800'>
+        <span className=' inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium  text-myText-darkest'>
           동네질문
         </span>
         <div className='flex space-x-4 py-3'>
           <div className='aspect-square h-10 rounded-full bg-slate-300' />
           <div className='flex flex-col justify-center'>
-            <span className='text-sm font-medium text-gray-900'>
+            <span className='text-sm font-medium text-myText-darkest'>
               Steve Jebs
             </span>
             <span className='text-xs text-gray-600'>View profile →</span>
@@ -20,13 +21,13 @@ const CommunityDetails: NextPage = () => {
         </div>
       </div>
       <div className='flex flex-col items-start border-t border-b'>
-        <span className='py-3 px-4 text-gray-700'>
-          <span className='text-orange-500'>Q. </span>What is the best mandu
+        <span className='py-3 px-4  text-myText-dark'>
+          <span className='text-myOrange'>Q. </span>What is the best mandu
           restaurant?
         </span>
       </div>
       <div className='flex space-x-4 border-b-2 py-2.5'>
-        <div className='flex items-center space-x-2 pl-4 text-sm text-gray-800'>
+        <div className='flex items-center space-x-2 pl-4 text-sm  text-myText-darkest'>
           <div>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -48,7 +49,7 @@ const CommunityDetails: NextPage = () => {
             <span>1</span>
           </div>
         </div>
-        <div className=' flex items-center space-x-2 text-sm text-gray-800'>
+        <div className=' flex items-center space-x-2 text-sm text-myText-darkest'>
           <div>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -76,22 +77,18 @@ const CommunityDetails: NextPage = () => {
         <div className='mb-1 flex space-x-4 px-4 py-4' key={i}>
           <div className='aspect-square h-8 rounded-full bg-slate-300' />
           <div className='flex flex-col justify-center'>
-            <span className=' text-sm font-medium text-gray-900'>
+            <span className=' text-sm font-medium text-myText-darkest'>
               Steve Jebs
             </span>
-            <span className=' text-xs text-gray-600'>2시간 전</span>
+            <span className=' text-xs text-myText-medium'>2시간 전</span>
             <span className='mt-3'>
               The best mandu restaurant is the one next to my house.
             </span>
           </div>
         </div>
       ))}
-      <div className='mt-5 flex flex-col space-y-3 px-4'>
-        <textarea
-          className='placeholder:gray-300 rounded-md border-gray-300 focus:border-orange-400 focus:ring-orange-400'
-          rows={4}
-          placeholder='Answer this question!'
-        ></textarea>
+      <div className=' space-y-3'>
+        <Textarea />
         <Button text='Reply' />
       </div>
     </Layout>

@@ -1,4 +1,6 @@
+import InputChat from '@/components/input-chat';
 import Layout from '@/components/layout';
+import Message from '@/components/message';
 import type { NextPage } from 'next';
 
 const LiveDetail: NextPage = () => {
@@ -20,74 +22,23 @@ const LiveDetail: NextPage = () => {
             motherfucker to get shot. You understand?
           </p>
         </div>
-        <div className='mt-3 h-[45vh] overflow-y-scroll '>
-          <div className='mt-6 flex items-start space-x-3 px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              Hi how much are you selling them for?
-            </span>
-          </div>
-          <div className='mt-6 flex flex-row-reverse items-start space-x-3 space-x-reverse px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              I wnat $20,000
-            </span>
-          </div>
-          <div className='mt-6 flex items-start space-x-3 px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              Hi how much are you selling them for?
-            </span>
-          </div>
-          <div className='mt-6 flex flex-row-reverse items-start space-x-3 space-x-reverse px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              I wnat $20,000
-            </span>
-          </div>
-          <div className='mt-6 flex items-start space-x-3 px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              Hi how much are you selling them for?
-            </span>
-          </div>
-          <div className='mt-6 flex flex-row-reverse items-start space-x-3 space-x-reverse px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              I wnat $20,000
-            </span>
-          </div>
-          <div className='mt-6 flex items-start space-x-3 px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              Hi how much are you selling them for?
-            </span>
-          </div>
-          <div className='mt-6 flex flex-row-reverse items-start space-x-3 space-x-reverse px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              I wnat $20,000
-            </span>
-          </div>
-          <div className='mt-6 flex items-start space-x-3 px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              Hi how much are you selling them for?
-            </span>
-          </div>
-          <div className='mt-6 flex flex-row-reverse items-start space-x-3 space-x-reverse px-3'>
-            <div className='aspect-square w-10 rounded-full bg-slate-300'></div>
-            <span className='w-1/2 rounded-md border border-gray-300 to-gray-700 p-2 text-sm'>
-              I wnat $20,000
-            </span>
-          </div>
+        <div className='mt-3 h-[45vh] space-y-4 overflow-y-scroll '>
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
+          <Message message='Hi how much are you selling them for?' />
+          <Message message='I want $20,000' reversed />
         </div>
-        <div className='fixed bottom-0 right-0 flex w-full items-center justify-center bg-white px-4 py-2 pt-4'>
-          <input className='w-full rounded-full' type='text' />
-          <button className='absolute right-0 mr-6 flex items-center justify-center rounded-full bg-orange-400 px-3 py-1 font-medium text-white ring-orange-500 ring-offset-2 hover:bg-orange-500 hover:text-white focus:ring-2'>
-            &rarr;
-          </button>
-        </div>
+        <InputChat />
       </div>
     </Layout>
   );
