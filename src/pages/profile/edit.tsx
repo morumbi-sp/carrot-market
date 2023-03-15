@@ -1,3 +1,5 @@
+import Button from '@/components/button';
+import Input from '@/components/input';
 import Layout from '@/components/layout';
 import { NextPage } from 'next';
 
@@ -22,41 +24,10 @@ const EditProfile: NextPage = () => {
             />
           </div>
         </div>
-        <div className='flex flex-col '>
-          <label
-            className='text-sm font-medium text-gray-800'
-            htmlFor='inputEmail'
-          >
-            Email address
-          </label>
-          <input
-            className='mt-2 rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500'
-            type='email'
-            id='inputEmail'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label
-            className='text-sm font-medium text-gray-800'
-            htmlFor='inputPhone'
-          >
-            Phone number
-          </label>
-          <div className='mt-2 flex'>
-            <span className='flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-600 shadow-sm'>
-              +82
-            </span>
-            <input
-              className='w-full rounded-r-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500'
-              type='text'
-              id='inputPhone'
-            />
-          </div>
-        </div>
+        <Input type='text' title='Email address' />
+        <Input type='phone' title='Phone number' />
         <div>
-          <button className='w-full rounded-md bg-orange-500 py-2 text-sm font-medium  text-white ring-orange-600 ring-offset-2 hover:bg-orange-600 focus:ring-2'>
-            Update profile
-          </button>
+          <Button text='Update profile' />
         </div>
       </div>
     </Layout>

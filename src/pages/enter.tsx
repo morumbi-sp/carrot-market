@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { cls } from '../../libs/utils';
+import { cls } from '../libs/utils';
 
 const EnterJ: NextPage = () => {
   const [method, setMethod] = useState<'email' | 'phone'>('email');
