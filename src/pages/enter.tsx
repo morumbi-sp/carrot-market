@@ -1,3 +1,5 @@
+import Button from '@/components/button';
+import Input from '@/components/input';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import { cls } from '../libs/utils';
@@ -15,7 +17,7 @@ const EnterJ: NextPage = () => {
               className={cls(
                 'border-b-2 py-4 font-medium',
                 method === 'email'
-                  ? 'border-b-2 border-orange-500 text-orange-500'
+                  ? 'border-b-2 border-myOrange text-myOrange'
                   : 'border-transparent'
               )}
               onClick={() => setMethod('email')}
@@ -26,7 +28,7 @@ const EnterJ: NextPage = () => {
               className={cls(
                 'border-b-2 py-4 font-medium',
                 method === 'phone'
-                  ? 'border-b-2 border-orange-500 text-orange-500'
+                  ? 'border-b-2 border-myOrange text-myOrange'
                   : 'border-transparent'
               )}
               onClick={() => setMethod('phone')}
@@ -36,48 +38,27 @@ const EnterJ: NextPage = () => {
           </div>
         </div>
         <form className='mt-7'>
-          <label htmlFor='input' className='text-sm font-medium'>
-            {method === 'email' && 'Email address'}
-            {method === 'phone' && 'Phone number'}
-          </label>
-          <div>
-            {method === 'email' && (
-              <input
-                id='input'
-                className=' mt-1 w-full rounded-md border-gray-300 placeholder:text-gray-300 focus:border-orange-500 focus:ring-orange-500'
-                type='text'
-                placeholder='Please input your email address'
-                required
-              />
-            )}
-            {method === 'phone' && (
-              <div className='mt-1  flex rounded-md shadow-sm'>
-                <span className='flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500'>
-                  +82
-                </span>
-                <input
-                  id='input'
-                  className='w-full rounded-r-md border-gray-300 placeholder:text-gray-400 focus:border-orange-500 focus:ring-orange-500'
-                  type='number'
-                  placeholder='Please input your phone number'
-                  required
-                />
-              </div>
-            )}
-          </div>
-          <button className='mt-4 w-full rounded-md bg-orange-500 py-[9px] text-sm text-white ring-orange-600 ring-offset-2 hover:bg-orange-600 focus:ring-2'>
-            {method === 'email' && 'Get login link'}
-            {method === 'phone' && 'Get One time Password'}
-          </button>
+          {method === 'email' && (
+            <div className='space-y-2'>
+              <Input type='text' title='Email Address' />
+              <Button text='Get login link' />
+            </div>
+          )}
+          {method === 'phone' && (
+            <div className='space-y-2'>
+              <Input type='phone' title='Phone number' />
+              <Button text='Get One time Password' />
+            </div>
+          )}
         </form>
         <div className='mt-8 text-center'>
           <div className='border-b border-gray-200'></div>
-          <span className='relative -top-3.5 bg-white px-2 text-sm text-gray-500 '>
+          <span className='relative -top-3.5 bg-white px-2 text-sm text-myText-light '>
             Or enter with
           </span>
         </div>
         <div className='mt-2 grid grid-cols-2 gap-3'>
-          <button className='flex items-center justify-center rounded-md border border-gray-300 py-2 text-gray-600 shadow-sm hover:bg-gray-200'>
+          <button className='flex items-center justify-center rounded-md border border-gray-300 py-2 text-myText-medium shadow-sm hover:bg-gray-200'>
             <svg
               className='h-5 w-5'
               aria-hidden='true'
@@ -87,7 +68,7 @@ const EnterJ: NextPage = () => {
               <path d='M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84' />
             </svg>
           </button>
-          <button className='flex items-center justify-center rounded-md border border-gray-300 py-2 text-gray-600 shadow-sm hover:bg-gray-200'>
+          <button className='flex items-center justify-center rounded-md border border-gray-300 py-2 text-myText-medium shadow-sm hover:bg-gray-200'>
             <svg
               className='h-5 w-5'
               aria-hidden='true'
