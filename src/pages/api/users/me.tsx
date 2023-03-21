@@ -24,4 +24,4 @@ const handler = async (
   });
 };
 
-export default withApiSession(WithHandler('GET', handler));
+export default withApiSession(WithHandler({ method: 'GET', handler }));

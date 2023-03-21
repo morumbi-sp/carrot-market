@@ -54,4 +54,4 @@ const handler = async (
   });
 };
 
-export default WithHandler('POST', handler);
+export default WithHandler({ method: 'POST', handler, isPrivate: false });
