@@ -2,7 +2,8 @@ import Button from '@/components/button';
 import Input from '@/components/input';
 import useMutation from '@/libs/client/useMutation';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { FieldValues, useForm, UseFormRegisterReturn } from 'react-hook-form';
 import { cls } from '../libs/client/utils';
 
@@ -37,6 +38,14 @@ const Enter: NextPage = () => {
     if (tokenLoading) return;
     confirmToken(validForm);
   };
+
+  const router = useRouter();
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push('/');
+    }
+  }, [tokenData, router]);
+
   return (
     <div className='mt-16 px-4'>
       <h3 className='text-center text-3xl font-bold'>Enter to Carrot</h3>
