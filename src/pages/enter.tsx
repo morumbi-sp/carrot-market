@@ -1,56 +1,127 @@
 import Button from '@/components/button';
 import Input from '@/components/input';
+import useMutation from '@/libs/client/useMutation';
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { cls } from '../libs/utils';
+import { FieldValues, useForm, UseFormRegisterReturn } from 'react-hook-form';
+import { cls } from '../libs/client/utils';
 
-const EnterJ: NextPage = () => {
+interface EnterForm {
+  email: string;
+  phone: string;
+}
+
+interface MutationResult {
+  ok: boolean;
+}
+
+interface TokenForm {
+  token: string;
+}
+
+const Enter: NextPage = () => {
+  const [enter, { loading, data, error }] =
+    useMutation<MutationResult>('/api/users/enter');
+  const [confirmToken, { loading: tokenLoading, data: tokenData }] =
+    useMutation<MutationResult>('/api/users/confirm');
+  const [submitting, setSubmitting] = useState(false);
+  const { register, reset, handleSubmit } = useForm<EnterForm>();
+  const { register: TokenRegister, handleSubmit: TokenHandleSubmit } =
+    useForm<TokenForm>();
   const [method, setMethod] = useState<'email' | 'phone'>('email');
+  const onValid = (validForm: FieldValues) => {
+    if (loading) return;
+    enter(validForm);
+  };
+  const onTokenValid = (validForm: FieldValues) => {
+    if (tokenLoading) return;
+    confirmToken(validForm);
+  };
   return (
     <div className='mt-16 px-4'>
       <h3 className='text-center text-3xl font-bold'>Enter to Carrot</h3>
       <div className='mt-7'>
-        <div>
-          <h5 className='text-center text-sm text-gray-500'>Enter using:</h5>
-          <div className='mt-5 grid grid-cols-2 gap-16 border-b'>
-            <button
-              className={cls(
-                'border-b-2 py-4 font-medium',
-                method === 'email'
-                  ? 'border-b-2 border-myOrange text-myOrange'
-                  : 'border-transparent'
-              )}
-              onClick={() => setMethod('email')}
-            >
-              Email address
-            </button>
-            <button
-              className={cls(
-                'border-b-2 py-4 font-medium',
-                method === 'phone'
-                  ? 'border-b-2 border-myOrange text-myOrange'
-                  : 'border-transparent'
-              )}
-              onClick={() => setMethod('phone')}
-            >
-              Phone number
-            </button>
-          </div>
-        </div>
-        <form className='mt-7'>
-          {method === 'email' && (
+        {data?.ok ? (
+          <form className='mt-7' onSubmit={TokenHandleSubmit(onTokenValid)}>
             <div className='space-y-2'>
-              <Input type='text' title='Email Address' />
-              <Button text='Get login link' />
+              <Input
+                type='text'
+                title='Confirm Token'
+                resister={TokenRegister('token', {
+                  required: 'Input a valid Token',
+                })}
+              />
+              <Button text={tokenLoading ? 'Loading' : 'Submit'} />
             </div>
-          )}
-          {method === 'phone' && (
-            <div className='space-y-2'>
-              <Input type='phone' title='Phone number' />
-              <Button text='Get One time Password' />
+          </form>
+        ) : (
+          <>
+            <div>
+              <h5 className='text-center text-sm text-gray-500'>
+                Enter using:
+              </h5>
+              <div className='mt-5 grid grid-cols-2 gap-16 border-b'>
+                <button
+                  className={cls(
+                    'border-b-2 py-4 font-medium',
+                    method === 'email'
+                      ? 'border-b-2 border-myOrange text-myOrange'
+                      : 'border-transparent'
+                  )}
+                  onClick={() => {
+                    setMethod('email');
+                    reset();
+                  }}
+                >
+                  Email address
+                </button>
+                <button
+                  className={cls(
+                    'border-b-2 py-4 font-medium',
+                    method === 'phone'
+                      ? 'border-b-2 border-myOrange text-myOrange'
+                      : 'border-transparent'
+                  )}
+                  onClick={() => {
+                    setMethod('phone');
+                    reset();
+                  }}
+                >
+                  Phone number
+                </button>
+              </div>
             </div>
-          )}
-        </form>
+            <form className='mt-7' onSubmit={handleSubmit(onValid)}>
+              {method === 'email' && (
+                <div className='space-y-2'>
+                  <Input
+                    type='text'
+                    title='Email Address'
+                    resister={register('email', {
+                      required: 'Input a valid email address',
+                    })}
+                  />
+                  <Button text='Get login link' />
+                </div>
+              )}
+              {method === 'phone' && (
+                <div className='space-y-2'>
+                  <Input
+                    type='phone'
+                    title='Phone number'
+                    resister={register('phone', {
+                      required: 'Input a valid phone number',
+                    })}
+                  />
+                  <Button
+                    text={submitting ? 'Loading' : 'Get One time Password'}
+                  />
+                </div>
+              )}
+            </form>
+          </>
+        )}
+
         <div className='mt-8 text-center'>
           <div className='border-b border-gray-200'></div>
           <span className='relative -top-3.5 bg-white px-2 text-sm text-myText-light '>
@@ -88,4 +159,4 @@ const EnterJ: NextPage = () => {
   );
 };
 
-export default EnterJ;
+export default Enter;

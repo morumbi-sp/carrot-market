@@ -1,13 +1,15 @@
+import type { UseFormRegisterReturn } from 'react-hook-form';
+
 interface InputProps {
   type: 'text' | 'phone' | 'price';
   title: string;
-  [key: string]: any;
+  resister: UseFormRegisterReturn;
 }
 
 const inputColor =
   'border-gray-300 shadow-sm focus:border-myOrange focus:ring-myOrange';
 
-const Input = ({ type, title, ...rest }: InputProps) => {
+const Input = ({ type, title, resister }: InputProps) => {
   return (
     <div className='flex flex-col space-y-2 '>
       <label
@@ -21,7 +23,7 @@ const Input = ({ type, title, ...rest }: InputProps) => {
           className={`rounded-md ${inputColor}`}
           type='text'
           id={`input${title}`}
-          {...rest}
+          {...resister}
         />
       ) : null}
       {type === 'phone' ? (
@@ -33,7 +35,7 @@ const Input = ({ type, title, ...rest }: InputProps) => {
             className={`w-full rounded-r-md ${inputColor}`}
             type='text'
             id={`input${title}`}
-            {...rest}
+            {...resister}
           />
         </div>
       ) : null}
