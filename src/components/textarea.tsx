@@ -1,10 +1,13 @@
+import { UseFormRegisterReturn } from 'react-hook-form';
+
 interface TextareaProps {
   label?: string;
   id?: string;
+  resister: UseFormRegisterReturn;
   [key: string]: any;
 }
 
-const Textarea = ({ label, id, ...rest }: TextareaProps) => {
+const Textarea = ({ label, id, resister, ...rest }: TextareaProps) => {
   return (
     <div className='flex flex-col space-y-1'>
       {label ? (
@@ -16,6 +19,7 @@ const Textarea = ({ label, id, ...rest }: TextareaProps) => {
         className='rounded-md border-gray-300 focus:border-myOrange focus:ring-myOrange'
         id={id}
         rows={4}
+        {...resister}
       ></textarea>
     </div>
   );
