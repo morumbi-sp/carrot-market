@@ -27,7 +27,7 @@ const Home: NextPage = () => {
           />
         ))}
         <FloatingButton
-          href='/'
+          href='/products/upload'
           icon={
             <svg
               xmlns='http://www.w3.org/2000/svg'

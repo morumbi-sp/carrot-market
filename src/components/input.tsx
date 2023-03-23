@@ -49,7 +49,7 @@ const Input = ({ type, title, resister }: InputProps) => {
             type='text'
             id={`input${title}`}
             placeholder='0.00'
-            {...rest}
+            {...resister}
           />
           <span className='absolute right-0 select-none px-3 text-myText-lightest'>
             USD

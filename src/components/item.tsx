@@ -12,7 +12,7 @@ interface ItemProps {
 const Item = ({ title, subtitle, id, price, comments, hearts }: ItemProps) => {
   return (
     <Link
-      href={`/items/${id}`}
+      href={`/products/${id}`}
       className='flex cursor-pointer justify-between border-b py-5 px-4'
       key={id}
     >
