@@ -6,7 +6,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import useSWR from 'swr';
 
-interface ProductResponse {
+export interface ProductResponse {
   ok: boolean;
   products: Product[];
 }
