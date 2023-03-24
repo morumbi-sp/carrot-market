@@ -30,7 +30,6 @@ function useMutation<T = any>(
       .catch((error) => setState((prev) => ({ ...prev, error })))
       .finally(() => setState((prev) => ({ ...prev, loading: false })));
   };
-  console.log('data', data);
   return [mutation, { loading, data, error }];
 }
 

@@ -6,14 +6,19 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import useSWR from 'swr';
 
+interface ProductWithFavsCount extends Product {
+  _count: { favs: number };
+}
+
 export interface ProductResponse {
   ok: boolean;
-  products: Product[];
+  products: ProductWithFavsCount[];
 }
 
 const Home: NextPage = () => {
   const { data } = useSWR<ProductResponse>('/api/products');
-  console.log(data);
+
+  console.log(data?.products);
   return (
     <Layout title='Home' hasTabBar>
       <Head>
@@ -28,7 +33,7 @@ const Home: NextPage = () => {
             key={product.id}
             id={product.id}
             comments={1}
-            hearts={2}
+            hearts={product._count.favs}
           />
         ))}
         <FloatingButton
