@@ -5,7 +5,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { FieldValues, useForm, UseFormRegisterReturn } from 'react-hook-form';
-import { cls } from '../libs/client/utils';
+import { cls } from '@/libs/client/utils';
 
 interface EnterForm {
   email: string;

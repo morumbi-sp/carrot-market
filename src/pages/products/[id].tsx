@@ -1,11 +1,13 @@
 import Button from '@/components/button';
 import Layout from '@/components/layout';
+import useMutation from '@/libs/client/useMutation';
 import { Product, User } from '@prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import products from '../api/products';
+import { cls } from '@/libs/client/utils';
 
 interface ProductWithUser extends Product {
   user: User;
@@ -15,13 +17,21 @@ interface ItemDetailResponse {
   ok: boolean;
   product: ProductWithUser;
   relatedProducts: Product[];
+  isLiked: boolean;
 }
 
 const Items: NextPage = () => {
   const router = useRouter();
-  const { data } = useSWR<ItemDetailResponse>(
+  const { data, mutate } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
+  const [toggleFav] = useMutation(`/api/products/${router.query.id}/fav`);
+  const onFavClick = () => {
+    if (!data) return;
+    mutate({ ...data, isLiked: !data.isLiked }, false);
+    toggleFav({});
+  };
+
   return (
     <Layout canGoBack>
       <div className=' px-4'>
@@ -54,10 +64,18 @@ const Items: NextPage = () => {
           </div>
           <div className='flex items-center justify-between space-x-4'>
             <Button text='Talk to seller' />
-            <div className='rounded-md p-3 text-gray-400 transition-all hover:bg-gray-200 hover:text-gray-500 hover:shadow-sm'>
+            <button
+              onClick={onFavClick}
+              className={cls(
+                'rounded-md p-3  transition-all  hover:shadow-sm',
+                data?.isLiked
+                  ? 'text-red-500 hover:bg-red-100 hover:text-red-600'
+                  : 'text-gray-400 hover:bg-gray-100 hover:text-gray-500 '
+              )}
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
-                fill='none'
+                fill={data?.isLiked ? 'currentColor' : 'none'}
                 viewBox='0 0 24 24'
                 strokeWidth='2'
                 stroke='currentColor'
@@ -69,7 +87,7 @@ const Items: NextPage = () => {
                   d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z'
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
         <div className='mt-8'>
