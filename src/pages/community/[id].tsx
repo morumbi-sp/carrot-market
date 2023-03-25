@@ -1,9 +1,31 @@
 import Button from '@/components/button';
 import Layout from '@/components/layout';
 import Textarea from '@/components/textarea';
+import { Post, User } from '@prisma/client';
 import { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
+interface PostWithUser extends Post {
+  user: User;
+  _count: {
+    answers: number;
+    wonderings: number;
+  };
+}
+
+interface PostResponse {
+  ok: boolean;
+  post: PostWithUser;
+}
 
 const CommunityDetails: NextPage = () => {
+  const router = useRouter();
+  const { data } = useSWR<PostResponse>(
+    router.query.id ? `/api/posts/${router.query.id}` : null
+  );
+  console.log(data);
   return (
     <Layout canGoBack>
       <div className='px-4'>
@@ -14,16 +36,21 @@ const CommunityDetails: NextPage = () => {
           <div className='aspect-square h-10 rounded-full bg-slate-300' />
           <div className='flex flex-col justify-center'>
             <span className='text-sm font-medium text-myText-darkest'>
-              Steve Jebs
+              {data?.post.user.name}
             </span>
-            <span className='text-xs text-gray-600'>View profile →</span>
+            <Link
+              href={`/users/profiles/${data?.post.user.id}`}
+              className='text-xs text-gray-600'
+            >
+              View profile →
+            </Link>
           </div>
         </div>
       </div>
       <div className='flex flex-col items-start border-t border-b'>
         <span className='py-3 px-4  text-myText-dark'>
-          <span className='text-myOrange'>Q. </span>What is the best mandu
-          restaurant?
+          <span className='text-myOrange'>Q. </span>
+          {data?.post.question}
         </span>
       </div>
       <div className='flex space-x-4 border-b-2 py-2.5'>
@@ -46,7 +73,7 @@ const CommunityDetails: NextPage = () => {
           </div>
           <div className='space-x-1'>
             <span>궁금해요</span>
-            <span>1</span>
+            <span>{data?.post._count.wonderings}</span>
           </div>
         </div>
         <div className=' flex items-center space-x-2 text-sm text-myText-darkest'>
@@ -68,7 +95,7 @@ const CommunityDetails: NextPage = () => {
           </div>
           <div>
             <span>답변</span>
-            <span>1</span>
+            <span>{data?.post._count.answers}</span>
           </div>
         </div>
       </div>

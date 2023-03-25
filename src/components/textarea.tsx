@@ -3,11 +3,18 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 interface TextareaProps {
   label?: string;
   id?: string;
-  resister: UseFormRegisterReturn;
+  resister?: UseFormRegisterReturn;
+  placeholder?: string;
   [key: string]: any;
 }
 
-const Textarea = ({ label, id, resister, ...rest }: TextareaProps) => {
+const Textarea = ({
+  label,
+  id,
+  resister,
+  placeholder,
+  ...rest
+}: TextareaProps) => {
   return (
     <div className='flex flex-col space-y-1'>
       {label ? (
@@ -20,6 +27,7 @@ const Textarea = ({ label, id, resister, ...rest }: TextareaProps) => {
         id={id}
         rows={4}
         {...resister}
+        placeholder={placeholder}
       ></textarea>
     </div>
   );
