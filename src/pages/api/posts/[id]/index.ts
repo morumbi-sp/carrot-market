@@ -15,6 +15,20 @@ const handler = async (
       id: Number(id?.toString()),
     },
     include: {
+      answers: {
+        select: {
+          createdAt: true,
+          answerText: true,
+          id: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              avatar: true,
+            },
+          },
+        },
+      },
       user: {
         select: {
           name: true,

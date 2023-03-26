@@ -60,17 +60,17 @@ const Upload: NextPage = () => {
           <input className='hidden' type='file' id='addPic' />
         </div>
         <Input
-          resister={register('name', { required: true })}
+          register={register('name', { required: true })}
           title='Name'
           type='text'
         />
         <Input
-          resister={register('price', { required: true })}
+          register={register('price', { required: true })}
           title='Price'
           type='price'
         />
         <Textarea
-          resister={register('description', { required: true })}
+          register={register('description', { required: true })}
           label='Description'
         />
         <Button text={loading ? 'Now loading...' : 'Upload item'} />

@@ -1,10 +1,12 @@
 import Button from '@/components/button';
 import Layout from '@/components/layout';
 import Textarea from '@/components/textarea';
-import { Post, User } from '@prisma/client';
+import useMutation from '@/libs/client/useMutation';
+import { Answer, Post, User } from '@prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
 interface PostWithUser extends Post {
@@ -13,11 +15,20 @@ interface PostWithUser extends Post {
     answers: number;
     wonderings: number;
   };
+  answers: AnswerWithUser[];
+}
+
+interface AnswerWithUser extends Answer {
+  user: User;
 }
 
 interface PostResponse {
   ok: boolean;
   post: PostWithUser;
+}
+
+interface AnswerForm {
+  answerText: string;
 }
 
 const CommunityDetails: NextPage = () => {
@@ -26,6 +37,17 @@ const CommunityDetails: NextPage = () => {
     router.query.id ? `/api/posts/${router.query.id}` : null
   );
   console.log(data);
+
+  const { register, handleSubmit } = useForm<AnswerForm>();
+  const [postAnswer, { loading, data: answerData }] = useMutation(
+    `/api/posts/${router.query.id}/answer`
+  );
+
+  const onValid = (dataUp: AnswerForm) => {
+    if (loading) return;
+    postAnswer(dataUp);
+  };
+
   return (
     <Layout canGoBack>
       <div className='px-4'>
@@ -100,24 +122,26 @@ const CommunityDetails: NextPage = () => {
         </div>
       </div>
 
-      {[1, 1, 1].map((_, i) => (
-        <div className='mb-1 flex space-x-4 px-4 py-4' key={i}>
+      {data?.post.answers.map((answer) => (
+        <div className='mb-1 flex space-x-4 px-4 py-4' key={answer.id}>
           <div className='aspect-square h-8 rounded-full bg-slate-300' />
           <div className='flex flex-col justify-center'>
             <span className=' text-sm font-medium text-myText-darkest'>
-              Steve Jebs
+              {answer.user.name}
             </span>
-            <span className=' text-xs text-myText-medium'>2시간 전</span>
-            <span className='mt-3'>
-              The best mandu restaurant is the one next to my house.
+            <span className=' text-xs text-myText-medium'>
+              {answer.createdAt}
             </span>
+            <span className='mt-3'>{answer.answerText}</span>
           </div>
         </div>
       ))}
-      <div className=' space-y-3'>
-        <Textarea />
+      <form className=' space-y-3' onSubmit={handleSubmit(onValid)}>
+        <Textarea
+          register={register('answerText', { required: true, minLength: 5 })}
+        />
         <Button text='Reply' />
-      </div>
+      </form>
     </Layout>
   );
 };

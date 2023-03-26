@@ -37,7 +37,7 @@ const Write: NextPage = () => {
         onSubmit={handleSubmit(onValid)}
       >
         <Textarea
-          resister={register('question', { required: true, minLength: 5 })}
+          register={register('question', { required: true, minLength: 5 })}
           placeholder='Ask a question!'
         />
         <Button text={loading ? 'loading...' : 'Submit'} />

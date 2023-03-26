@@ -56,7 +56,7 @@ const Enter: NextPage = () => {
               <Input
                 type='text'
                 title='Confirm Token'
-                resister={TokenRegister('token', {
+                register={TokenRegister('token', {
                   required: 'Input a valid Token',
                 })}
               />
@@ -106,7 +106,7 @@ const Enter: NextPage = () => {
                   <Input
                     type='text'
                     title='Email Address'
-                    resister={register('email', {
+                    register={register('email', {
                       required: 'Input a valid email address',
                     })}
                   />
@@ -118,7 +118,7 @@ const Enter: NextPage = () => {
                   <Input
                     type='phone'
                     title='Phone number'
-                    resister={register('phone', {
+                    register={register('phone', {
                       required: 'Input a valid phone number',
                     })}
                   />

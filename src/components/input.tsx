@@ -3,13 +3,13 @@ import type { UseFormRegisterReturn } from 'react-hook-form';
 interface InputProps {
   type: 'text' | 'phone' | 'price';
   title: string;
-  resister: UseFormRegisterReturn;
+  register: UseFormRegisterReturn;
 }
 
 const inputColor =
   'border-gray-300 shadow-sm focus:border-myOrange focus:ring-myOrange';
 
-const Input = ({ type, title, resister }: InputProps) => {
+const Input = ({ type, title, register }: InputProps) => {
   return (
     <div className='flex flex-col space-y-2 '>
       <label
@@ -23,7 +23,7 @@ const Input = ({ type, title, resister }: InputProps) => {
           className={`rounded-md ${inputColor}`}
           type='text'
           id={`input${title}`}
-          {...resister}
+          {...register}
         />
       ) : null}
       {type === 'phone' ? (
@@ -35,7 +35,7 @@ const Input = ({ type, title, resister }: InputProps) => {
             className={`w-full rounded-r-md ${inputColor}`}
             type='text'
             id={`input${title}`}
-            {...resister}
+            {...register}
           />
         </div>
       ) : null}
@@ -49,7 +49,7 @@ const Input = ({ type, title, resister }: InputProps) => {
             type='text'
             id={`input${title}`}
             placeholder='0.00'
-            {...resister}
+            {...register}
           />
           <span className='absolute right-0 select-none px-3 text-myText-lightest'>
             USD
