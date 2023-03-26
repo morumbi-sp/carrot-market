@@ -38,7 +38,7 @@ const Community: NextPage = () => {
               </div>
               <div className='mt-5 flex justify-between px-4 text-xs font-medium text-gray-500'>
                 <span>{post.user.name}</span>
-                <span>{post.createdAt}</span>
+                <span>{post.createdAt.toString()}</span>
               </div>
               <div className='mt-3 flex space-x-4 border-b-2 border-t py-2.5'>
                 <div className='flex items-center space-x-2 pl-4 text-sm text-gray-800'>

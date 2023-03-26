@@ -7,33 +7,31 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) => {
-  if (req.method === 'POST') {
-    const {
-      body: { answerText },
-      session: { user },
-      query: { id },
-    } = req;
-    const answer = await client.answer.create({
-      data: {
-        answerText,
-        user: {
-          connect: {
-            id: user?.id,
-          },
-        },
-        post: {
-          connect: {
-            id: Number(id?.toString()),
-          },
+  const {
+    body: { answerText },
+    session: { user },
+    query: { id },
+  } = req;
+  const answer = await client.answer.create({
+    data: {
+      answerText,
+      user: {
+        connect: {
+          id: user?.id,
         },
       },
-    });
+      post: {
+        connect: {
+          id: Number(id?.toString()),
+        },
+      },
+    },
+  });
 
-    res.json({
-      ok: true,
-      answer,
-    });
-  }
+  res.json({
+    ok: true,
+    answer,
+  });
 };
 
 export default withApiSession(WithHandler({ methods: ['POST'], handler }));
