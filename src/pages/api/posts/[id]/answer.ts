@@ -12,6 +12,7 @@ const handler = async (
     session: { user },
     query: { id },
   } = req;
+
   const answer = await client.answer.create({
     data: {
       answerText,

@@ -7,6 +7,7 @@ import { Answer, Post, User } from '@prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
@@ -39,21 +40,20 @@ const CommunityDetails: NextPage = () => {
     router.query.id ? `/api/posts/${router.query.id}` : null
   );
 
-  const { register, handleSubmit } = useForm<AnswerForm>();
-  const [postAnswer, { loading, data: answerData }] = useMutation(
-    `/api/posts/${router.query.id}/answer`
-  );
+  const { register, handleSubmit, reset } = useForm<AnswerForm>();
+
+  const [postAnswer, { loading: loadingAnswer, data: answerData }] =
+    useMutation(`/api/posts/${router.query.id}/answer`);
 
   const [postWonder, { loading: loadingWonder, data: wonderData }] =
     useMutation(`/api/posts/${router.query.id}/wonder`);
 
   const onValid = (dataUp: AnswerForm) => {
-    if (loading) return;
+    if (loadingAnswer) return;
     postAnswer(dataUp);
   };
 
   const onClickWonderHandler = () => {
-    if (loadingWonder) return;
     if (!data) return;
     mutate(
       {
@@ -71,9 +71,16 @@ const CommunityDetails: NextPage = () => {
       },
       false
     );
-    postWonder({});
+    if (!loadingWonder) {
+      postWonder({});
+    }
   };
 
+  useEffect(() => {
+    if (answerData && answerData.ok) {
+      reset();
+    }
+  }, [answerData, reset]);
   return (
     <Layout canGoBack>
       <div className='px-4'>
@@ -172,7 +179,7 @@ const CommunityDetails: NextPage = () => {
         <Textarea
           register={register('answerText', { required: true, minLength: 5 })}
         />
-        <Button text='Reply' />
+        <Button text={loadingAnswer ? 'Loading...' : 'Reply'} />
       </form>
     </Layout>
   );
