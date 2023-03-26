@@ -1,6 +1,7 @@
 import Button from '@/components/button';
 import Layout from '@/components/layout';
 import Textarea from '@/components/textarea';
+import useCoords from '@/libs/client/useCoords';
 import useMutation from '@/libs/client/useMutation';
 import { Post } from '@prisma/client';
 import { NextPage } from 'next';
@@ -18,12 +19,13 @@ interface WriteResponse {
 }
 
 const Write: NextPage = () => {
+  const { latitude, longitude } = useCoords();
   const router = useRouter();
   const { register, handleSubmit } = useForm<WriteForm>();
   const [post, { loading, data }] = useMutation<WriteResponse>('/api/posts');
   const onValid = (dataUp: WriteForm) => {
     if (loading) return;
-    post(dataUp);
+    post({ ...dataUp, latitude, longitude });
   };
   useEffect(() => {
     if (data && data.ok) {

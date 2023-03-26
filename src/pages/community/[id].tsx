@@ -79,8 +79,9 @@ const CommunityDetails: NextPage = () => {
   useEffect(() => {
     if (answerData && answerData.ok) {
       reset();
+      mutate();
     }
-  }, [answerData, reset]);
+  }, [answerData, mutate, reset]);
   return (
     <Layout canGoBack>
       <div className='px-4'>
