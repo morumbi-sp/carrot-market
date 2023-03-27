@@ -1,20 +1,36 @@
 import Item from '@/components/item';
 import Layout from '@/components/layout';
+import { Fav, Product, Sale } from '@prisma/client';
 import { NextPage } from 'next';
+import useSWR from 'swr';
+
+interface ProductWithCount extends Product {
+  _count: { favs: number };
+}
+
+interface SalesWithProduct extends Sale {
+  product: ProductWithCount;
+}
+
+interface SalesResponse {
+  ok: boolean;
+  sales: SalesWithProduct[];
+}
 
 const Sold: NextPage = () => {
+  const { data } = useSWR<SalesResponse>('/api/users/me/sale');
   return (
     <Layout canGoBack>
       <div className='flex flex-col'>
-        {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, idx) => (
+        {data?.sales.map((sale) => (
           <Item
-            title='Pixel 5'
+            title={sale.product.name}
             subtitle='Silver'
-            price={120}
-            key={idx}
-            id={idx}
+            price={sale.product.price}
+            key={sale.id}
+            id={sale.productId}
             comments={2}
-            hearts={5}
+            hearts={sale.product._count.favs}
           />
         ))}
       </div>
