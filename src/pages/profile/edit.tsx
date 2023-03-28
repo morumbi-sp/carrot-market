@@ -1,8 +1,8 @@
 import Button from '@/components/button';
 import Input from '@/components/input';
 import Layout from '@/components/layout';
+import useMutation from '@/libs/client/useMutation';
 import useUser from '@/libs/client/useUser';
-import { User } from '@prisma/client';
 import { NextPage } from 'next';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,7 +10,13 @@ import { useForm } from 'react-hook-form';
 interface UpdateProfileForm {
   email?: string;
   phone?: string;
+  name?: string;
   formErrors?: string;
+}
+
+interface EditProfileResponse {
+  ok: boolean;
+  error?: string;
 }
 
 const EditProfile: NextPage = () => {
@@ -22,20 +28,33 @@ const EditProfile: NextPage = () => {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm();
+  } = useForm<UpdateProfileForm>();
+
+  const [editProfile, { data, loading }] =
+    useMutation<EditProfileResponse>('/api/users/me');
+
   useEffect(() => {
+    if (user?.name) setValue('name', user.name);
     if (user?.email) setValue('email', user.email);
     if (user?.phone) setValue('phone', user.phone);
   }, [setValue, user]);
-  const onValid = (dataUp: UpdateProfileForm) => {
-    if (dataUp.email === '' && dataUp.phone === '') {
-      setError('formErrors', {
+
+  useEffect(() => {
+    if (data && !data.ok) {
+      setError('formErrors', { message: data?.error });
+    }
+  }, [data, setError]);
+
+  const onValid = ({ name, email, phone }: UpdateProfileForm) => {
+    if (loading) return;
+    if (email === '' && phone === '') {
+      return setError('formErrors', {
         message: 'Email or Phone number are required.',
       });
-    } else {
-      console.log(dataUp);
     }
+    editProfile({ name, email, phone });
   };
+  console.log(data);
   return (
     <Layout canGoBack>
       <form className='space-y-4 px-4' onSubmit={handleSubmit(onValid)}>
@@ -56,6 +75,7 @@ const EditProfile: NextPage = () => {
             />
           </div>
         </div>
+        <Input register={register('name')} type='text' title='Name' />
         <Input register={register('email')} type='text' title='Email address' />
         <Input register={register('phone')} type='phone' title='Phone number' />
         <div>
@@ -72,7 +92,7 @@ const EditProfile: NextPage = () => {
               </button>
             </div>
           ) : null}
-          <Button text='Update profile' />
+          <Button text={loading ? 'loading...' : 'Update profile'} />
         </div>
       </form>
     </Layout>

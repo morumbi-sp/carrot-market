@@ -1,7 +1,9 @@
 import { spawn } from 'child_process';
+import { HtmlProps } from 'next/dist/shared/lib/html-context';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { ReactPortal } from 'react';
+import { FieldErrors } from 'react-hook-form';
 import { cls } from '../libs/client/utils';
 
 interface LayoutProps {
