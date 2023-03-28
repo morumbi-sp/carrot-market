@@ -46,7 +46,7 @@ const Layout = ({ title, canGoBack, hasTabBar, children }: LayoutProps) => {
         ) : null}
         {title ? <span className='inset-x-0 text-center'>{title}</span> : ''}
         {canGoBack ? (
-          <span className='mr-auto ml-4 cursor-pointer'></span>
+          <span className='mr-8 ml-auto cursor-pointer'></span>
         ) : null}
       </div>
       <div className={cls('pt-16', hasTabBar ? 'pb-16' : '')}>{children}</div>
