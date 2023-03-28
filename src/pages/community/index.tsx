@@ -29,7 +29,6 @@ const Community: NextPage = () => {
   const { data } = useSWR<PostResponse>(
     !loading ? `/api/posts?latitude=${latitude}&longitude=${longitude}` : null
   );
-  console.log(data);
   return (
     <Layout title='동네생활' hasTabBar>
       <div>

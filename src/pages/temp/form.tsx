@@ -23,8 +23,6 @@ const Form: NextPage = () => {
   //   console.log(errors);
   // };
 
-  console.log(errors);
-
   return (
     <>
       <form

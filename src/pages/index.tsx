@@ -18,7 +18,6 @@ export interface ProductResponse {
 const Home: NextPage = () => {
   const { data } = useSWR<ProductResponse>('/api/products');
 
-  console.log(data?.products);
   return (
     <Layout title='Home' hasTabBar>
       <Head>

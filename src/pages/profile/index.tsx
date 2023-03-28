@@ -17,7 +17,6 @@ interface ReviewsResponse {
 const Profile: NextPage = () => {
   const { data: userData } = useSWR('/api/users/me');
   const { data: reviewData } = useSWR<ReviewsResponse>('/api/reviews');
-  console.log(reviewData);
   return (
     <Layout title='나의 캐롯' hasTabBar>
       <div className=' px-4'>

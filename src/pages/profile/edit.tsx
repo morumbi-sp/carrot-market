@@ -54,7 +54,6 @@ const EditProfile: NextPage = () => {
     }
     editProfile({ name, email, phone });
   };
-  console.log(data);
   return (
     <Layout canGoBack>
       <form className='space-y-4 px-4' onSubmit={handleSubmit(onValid)}>
