@@ -6,6 +6,7 @@ import useUser from '@/libs/client/useUser';
 import { Message, Stream, User } from '@prisma/client';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
@@ -23,9 +24,13 @@ interface MessageResponse {
   message: Message;
 }
 
+interface MessageWithUser extends Message {
+  user: User;
+}
+
 interface MessagesDataResponse {
   ok: boolean;
-  messages: Message[];
+  messages: MessageWithUser[];
 }
 
 const LiveDetail: NextPage = () => {
@@ -35,11 +40,9 @@ const LiveDetail: NextPage = () => {
   const { data: streamData } = useSWR<StreamResponse>(
     router.query.id ? `/api/streams/${router.query.id}` : null
   );
-  const { data: messageData } = useSWR<MessagesDataResponse>(
+  const { data: messageData, mutate } = useSWR<MessagesDataResponse>(
     router.query.id ? `/api/streams/${router.query.id}/messages` : null
   );
-  console.log(messageData);
-  console.log(user);
 
   const [sendMessage, { data: sendMessageData, loading }] =
     useMutation<MessageResponse>(`/api/streams/${router.query.id}/messages`);
@@ -49,6 +52,11 @@ const LiveDetail: NextPage = () => {
     reset();
     sendMessage({ messageText });
   };
+
+  useEffect(() => {
+    mutate();
+  }, [sendMessageData, mutate]);
+
   return (
     <Layout canGoBack>
       <div className=' px-4'>
@@ -63,11 +71,12 @@ const LiveDetail: NextPage = () => {
           <p className='my-6 text-gray-700'>{streamData?.stream.description}</p>
         </div>
         <div className='mt-3 h-[45vh] space-y-4 overflow-y-scroll '>
+          <h1 className='text-xl font-bold text-gray-900'>Live Chat</h1>
           {messageData?.messages.map((message) => (
             <MessageComponent
               key={message.id}
               message={message.messageText}
-              reversed={user?.id === message.userId ? true : false}
+              reversed={user?.id === message.userId}
             />
           ))}
         </div>

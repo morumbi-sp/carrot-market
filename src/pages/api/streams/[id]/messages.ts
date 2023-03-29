@@ -43,6 +43,15 @@ const handler = async (
       where: {
         streamId: Number(id?.toString()),
       },
+      include: {
+        user: {
+          select: {
+            name: true,
+            id: true,
+            avatar: true,
+          },
+        },
+      },
     });
     res.json({
       ok: true,
