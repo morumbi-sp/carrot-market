@@ -27,9 +27,10 @@ const handler = async (
 
   if (req.method === 'POST') {
     const {
-      body: { name, email, phone },
+      body: { name, email, phone, avatarId },
       session: { user },
     } = req;
+
     if (email) {
       const alreadyExists = Boolean(
         await client.user.findFirst({
@@ -91,6 +92,16 @@ const handler = async (
         },
         data: {
           name,
+        },
+      });
+    }
+    if (avatarId) {
+      await client.user.update({
+        where: {
+          id: user?.id,
+        },
+        data: {
+          avatar: avatarId,
         },
       });
     }

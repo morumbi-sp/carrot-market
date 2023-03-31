@@ -1,5 +1,5 @@
 import Layout from '@/components/layout';
-import { cls } from '@/libs/client/utils';
+import { avatarUrl, cls } from '@/libs/client/utils';
 import { Review, User } from '@prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
@@ -14,14 +14,28 @@ interface ReviewsResponse {
   reviews: ReviewWithUser[];
 }
 
+interface UserResponse {
+  ok: boolean;
+  profile: User;
+}
+
 const Profile: NextPage = () => {
-  const { data: userData } = useSWR('/api/users/me');
+  const { data: userData } = useSWR<UserResponse>('/api/users/me');
   const { data: reviewData } = useSWR<ReviewsResponse>('/api/reviews');
+  console.log(userData);
   return (
     <Layout title='나의 캐롯' hasTabBar>
       <div className=' px-4'>
         <div className='flex items-center space-x-3'>
-          <div className='aspect-square w-16 rounded-full bg-slate-500' />
+          {userData?.profile.avatar ? (
+            <img
+              src={avatarUrl(userData.profile.avatar)}
+              className='aspect-square w-16 rounded-full bg-slate-500'
+            />
+          ) : (
+            <div className='aspect-square w-16 rounded-full bg-slate-500' />
+          )}
+
           <div className='flex flex-col '>
             <span className='font-medium text-gray-800'>
               {userData?.profile?.name}
