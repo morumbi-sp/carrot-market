@@ -14,7 +14,6 @@ const Challenge: NextPage = () => {
     setFormData(convertedData);
   };
 
-  console.log(errors);
   return (
     <div className='0 mx-auto my-20 w-[440px] rounded-3xl border-2 border-r-8 border-b-8 border-gray-800 bg-[#FFE4E6] px-8 pt-8'>
       <h1 className='text-center text-[23px] font-bold text-gray-800'>
