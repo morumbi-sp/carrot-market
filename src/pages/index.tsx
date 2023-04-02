@@ -33,6 +33,7 @@ const Home: NextPage = () => {
             id={product.id}
             comments={1}
             hearts={product._count.favs}
+            image={product.image}
           />
         ))}
         <FloatingButton

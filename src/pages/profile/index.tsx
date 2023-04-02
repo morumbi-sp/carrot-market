@@ -1,5 +1,5 @@
 import Layout from '@/components/layout';
-import { avatarUrl, cls } from '@/libs/client/utils';
+import { imageUrl, cls } from '@/libs/client/utils';
 import { Review, User } from '@prisma/client';
 import { NextPage } from 'next';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ const Profile: NextPage = () => {
         <div className='flex items-center space-x-3'>
           {userData?.profile.avatar ? (
             <img
-              src={avatarUrl(userData.profile.avatar)}
+              src={imageUrl(userData.profile.avatar, 'avatar')}
               className='aspect-square w-16 rounded-full bg-slate-500'
             />
           ) : (

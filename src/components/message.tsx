@@ -2,11 +2,11 @@ import { cls } from '@/libs/client/utils';
 
 interface MessageProps {
   message: string;
-  avatarUrl?: string;
+  imageUrl?: string;
   reversed?: boolean;
 }
 
-const Message = ({ message, avatarUrl, reversed }: MessageProps) => {
+const Message = ({ message, imageUrl, reversed }: MessageProps) => {
   return (
     <div
       className={cls(

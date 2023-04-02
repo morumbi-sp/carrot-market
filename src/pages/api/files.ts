@@ -18,7 +18,6 @@ const handler = async (
       }
     )
   ).json();
-  console.log(response);
   res.json({
     ok: true,
     ...response.result,

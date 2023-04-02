@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import products from '../api/products';
-import { cls } from '@/libs/client/utils';
+import { cls, imageUrl } from '@/libs/client/utils';
+import Image from 'next/image';
 
 interface ProductWithUser extends Product {
   user: User;
@@ -36,9 +37,32 @@ const Items: NextPage = () => {
     <Layout canGoBack>
       <div className=' px-4'>
         <div>
-          <div className='h-96 bg-slate-300' />
+          {data?.product.image ? (
+            <div className='relative h-96'>
+              <Image
+                src={imageUrl(data?.product.image, 'thumbNail')}
+                className='object-cover'
+                fill
+                alt='product'
+              />
+            </div>
+          ) : (
+            <div className='h-96 bg-slate-300' />
+          )}
+
           <div className='flex space-x-4 border-b py-3'>
-            <div className='aspect-square h-12 rounded-full bg-slate-300' />
+            {data?.product.user.avatar ? (
+              <Image
+                width={48}
+                height={48}
+                src={imageUrl(data?.product.user.avatar, 'avatar')}
+                className='aspect-square h-12 rounded-full bg-slate-300'
+                alt='avatar'
+              />
+            ) : (
+              <div className='aspect-square h-12 rounded-full bg-slate-300' />
+            )}
+
             <div className='flex flex-col justify-center'>
               <span className='text-sm font-medium text-gray-900'>
                 {data?.product?.user?.name}

@@ -1,3 +1,5 @@
+import { imageUrl } from '@/libs/client/utils';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface ItemProps {
@@ -7,9 +9,18 @@ interface ItemProps {
   price: number;
   comments: number;
   hearts: number;
+  image?: string;
 }
 
-const Item = ({ title, subtitle, id, price, comments, hearts }: ItemProps) => {
+const Item = ({
+  title,
+  subtitle,
+  id,
+  price,
+  comments,
+  hearts,
+  image,
+}: ItemProps) => {
   return (
     <Link
       href={`/products/${id}`}
@@ -17,7 +28,19 @@ const Item = ({ title, subtitle, id, price, comments, hearts }: ItemProps) => {
       key={id}
     >
       <div className='flex items-center space-x-4'>
-        <div className='h-20 w-20 rounded-md bg-gray-400 ' />
+        {image ? (
+          <Image
+            width={80}
+            height={80}
+            src={imageUrl(image, 'avatar')}
+            className='h-20 w-20'
+            alt='product'
+            priority
+          />
+        ) : (
+          <div className='h-20 w-20 rounded-md bg-gray-400 ' />
+        )}
+
         <div className='space-y-1'>
           <div className='flex flex-col'>
             <span className='text-sm font-medium'>{title}</span>

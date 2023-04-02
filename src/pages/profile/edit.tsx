@@ -3,8 +3,9 @@ import Input from '@/components/input';
 import Layout from '@/components/layout';
 import useMutation from '@/libs/client/useMutation';
 import useUser from '@/libs/client/useUser';
-import { avatarUrl } from '@/libs/client/utils';
+import { imageUrl } from '@/libs/client/utils';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -40,7 +41,7 @@ const EditProfile: NextPage = () => {
     if (user?.name) setValue('name', user.name);
     if (user?.email) setValue('email', user.email);
     if (user?.phone) setValue('phone', user.phone);
-    if (user?.avatar) setAvatarPreview(avatarUrl(user.avatar));
+    if (user?.avatar) setAvatarPreview(imageUrl(user.avatar, 'avatar'));
   }, [setValue, user]);
 
   useEffect(() => {
@@ -90,7 +91,10 @@ const EditProfile: NextPage = () => {
       <form className='space-y-4 px-4' onSubmit={handleSubmit(onValid)}>
         <div className='flex items-center space-x-4'>
           {avatarPreview ? (
-            <img
+            <Image
+              width={56}
+              height={56}
+              alt='avatar'
               src={avatarPreview}
               className='aspect-square w-14 rounded-full bg-slate-500'
             />
