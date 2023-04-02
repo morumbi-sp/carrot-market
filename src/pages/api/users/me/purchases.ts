@@ -18,6 +18,7 @@ const handler = async (
           name: true,
           price: true,
           id: true,
+          image: true,
           _count: {
             select: {
               favs: true,
