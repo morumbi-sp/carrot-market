@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <title>Home</title>
       </Head>
       <div className=' flex flex-col'>
-        {data?.products.map((product) => (
+        {data?.products?.map((product) => (
           <Item
             title={product.name}
             subtitle='Black'

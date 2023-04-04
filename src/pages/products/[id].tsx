@@ -44,6 +44,7 @@ const Items: NextPage = () => {
                 className='object-cover'
                 fill
                 alt='product'
+                priority
               />
             </div>
           ) : (
