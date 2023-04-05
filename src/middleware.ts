@@ -9,13 +9,15 @@ export function middleware(req: NextRequest) {
       statusText: 'Nope!!',
     });
   }
-  // if (!req.cookies.has('carrotsession') && !req.url.includes('/enter')) {
-  //   req.nextUrl.searchParams.set('from', req.nextUrl.pathname);
-  //   req.nextUrl.pathname = '/enter';
-  //   return NextResponse.redirect(req.nextUrl);
-  // }
 
-  // if (request.nextUrl.pathname.startsWith('/chats')) {
-  //   console.log('here is chats!');
-  // }
+  if (!req.cookies.has('carrotsession') && !req.url.includes('/enter')) {
+    const url = req.nextUrl.clone();
+    console.log(url);
+    url.pathname = '/enter';
+    console.log(url);
+    return NextResponse.redirect(url);
+  }
 }
+export const config = {
+  matcher: ['/((?!api|_next/static|favicon.ico).*)'],
+};
