@@ -37,3 +37,6 @@ next-env.d.ts
 
 #prisma env file
 .env
+
+#temp folder
+/src/pages/temp
