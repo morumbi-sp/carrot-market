@@ -16,11 +16,13 @@ const handler = async (
   res: NextApiResponse<ResponseType>
 ) => {
   const { token } = req.body;
+  console.log(token);
   const foundToken = await client.token.findUnique({
     where: {
       payload: token,
     },
   });
+  console.log(foundToken);
   if (!foundToken) return res.status(404).end();
   req.session.user = {
     id: foundToken?.userId,
