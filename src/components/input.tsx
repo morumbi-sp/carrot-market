@@ -9,7 +9,7 @@ interface InputProps {
 const inputColor =
   'border-gray-300 shadow-sm focus:border-myOrange focus:ring-myOrange';
 
-const Input = ({ type, title, register, placeholder, value }: InputProps) => {
+const Input = ({ type, title, register }: InputProps) => {
   return (
     <div className='flex flex-col space-y-2 '>
       <label
