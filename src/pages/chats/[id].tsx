@@ -33,7 +33,7 @@ const ChatDetail: NextPage = () => {
           <Message message='I want $20,000' reversed />
           <Message message='미쳤어' />
         </div>
-        <InputChat />
+        {/* <InputChat register={}/> */}
       </div>
     </Layout>
   );
