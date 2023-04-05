@@ -14,16 +14,16 @@ const handler = async (
     const latitudeNumber = Number(latitude?.toString());
     const longitudeNumber = Number(longitude?.toString());
     const posts = await client.post.findMany({
-      where: {
-        latitude: {
-          gte: latitudeNumber - 0.01,
-          lte: latitudeNumber + 0.01,
-        },
-        longitude: {
-          gte: longitudeNumber - 0.01,
-          lte: longitudeNumber + 0.01,
-        },
-      },
+      // where: {
+      //   latitude: {
+      //     gte: latitudeNumber - 0.01,
+      //     lte: latitudeNumber + 0.01,
+      //   },
+      //   longitude: {
+      //     gte: longitudeNumber - 0.01,
+      //     lte: longitudeNumber + 0.01,
+      //   },
+      // },
       include: {
         user: {
           select: {
@@ -47,15 +47,13 @@ const handler = async (
 
   if (req.method === 'POST') {
     const {
-      body: { question, latitude, longitude },
+      body: { question },
       session: { user },
     } = req;
 
     const post = await client.post.create({
       data: {
         question,
-        latitude,
-        longitude,
         user: {
           connect: {
             id: user?.id,

@@ -21,14 +21,12 @@ interface PostResponse {
 }
 
 const Community: NextPage = () => {
-  const { latitude, longitude } = useCoords();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    latitude && longitude ? setLoading(false) : setLoading(true);
-  }, [latitude, longitude]);
-  const { data } = useSWR<PostResponse>(
-    !loading ? `/api/posts?latitude=${latitude}&longitude=${longitude}` : null
-  );
+  // const { latitude, longitude } = useCoords();
+  // useEffect(() => {
+  //   latitude && longitude ? setLoading(false) : setLoading(true);
+  // }, [latitude, longitude]);
+  const [loading, setLoading] = useState(false);
+  const { data } = useSWR<PostResponse>(`/api/posts`);
   return (
     <Layout title='동네생활' hasTabBar>
       <div>
