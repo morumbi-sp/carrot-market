@@ -14,11 +14,17 @@ const handler = async (
       body: { messageText },
     } = req;
 
+    const seller = await client.product.findUnique({
+      where: {
+        id: Number(id![1]),
+      },
+    });
+
     const createChat = await client.chat.create({
       data: {
         messageText,
         buyerId: Number(id![0]),
-
+        sellerId: seller?.userId ?? 0,
         user: {
           connect: {
             id: user?.id,

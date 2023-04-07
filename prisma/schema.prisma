@@ -194,6 +194,7 @@ model Chat {
   userId      Int
   productId   Int
   buyerId     Int
+  sellerId    Int
 
   @@index([userId])
   @@index([productId])
