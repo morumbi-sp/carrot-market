@@ -16,7 +16,7 @@ const Message = ({ message, image, reversed }: MessageProps) => {
     >
       {imageUrl ? (
         <img
-          src={imageUrl(image, 'thumbNail')}
+          src={imageUrl(image || '', 'thumbNail')}
           className='aspect-square w-8 rounded-full bg-slate-400'
         />
       ) : (
