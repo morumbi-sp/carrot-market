@@ -14,6 +14,7 @@ interface EnterForm {
 
 interface MutationResult {
   ok: boolean;
+  payload: string;
 }
 
 interface TokenForm {
@@ -52,6 +53,7 @@ const Enter: NextPage = () => {
         Welcome to my Carrot Baby
       </h3>
       <div className='mt-7'>
+        <div>Your Token is {data?.payload}</div>
         {data?.ok ? (
           <form className='mt-7' onSubmit={TokenHandleSubmit(onTokenValid)}>
             <div className='space-y-2'>

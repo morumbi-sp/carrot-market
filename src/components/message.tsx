@@ -1,12 +1,12 @@
-import { cls } from '@/libs/client/utils';
+import { cls, imageUrl } from '@/libs/client/utils';
 
 interface MessageProps {
   message: string;
-  imageUrl?: string;
+  image?: string;
   reversed?: boolean;
 }
 
-const Message = ({ message, imageUrl, reversed }: MessageProps) => {
+const Message = ({ message, image, reversed }: MessageProps) => {
   return (
     <div
       className={cls(
@@ -14,7 +14,15 @@ const Message = ({ message, imageUrl, reversed }: MessageProps) => {
         reversed ? 'flex-row-reverse space-x-reverse' : ''
       )}
     >
-      <div className='aspect-square w-8 rounded-full bg-slate-400' />
+      {imageUrl ? (
+        <img
+          src={imageUrl(image, 'thumbNail')}
+          className='aspect-square w-8 rounded-full bg-slate-400'
+        />
+      ) : (
+        <div className='aspect-square w-8 rounded-full bg-slate-400' />
+      )}
+
       <span className='w-1/2 rounded-md border border-gray-300 p-2 text-sm text-myText-darkest'>
         {message}
       </span>

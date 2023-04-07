@@ -9,12 +9,13 @@ import useSWR from 'swr';
 import products from '../api/products';
 import { cls, imageUrl } from '@/libs/client/utils';
 import Image from 'next/image';
+import useUser from '@/libs/client/useUser';
 
 interface ProductWithUser extends Product {
   user: User;
 }
 
-interface ItemDetailResponse {
+export interface ItemDetailResponse {
   ok: boolean;
   product: ProductWithUser;
   relatedProducts: Product[];
@@ -22,6 +23,7 @@ interface ItemDetailResponse {
 }
 
 const Items: NextPage = () => {
+  const userMe = useUser();
   const router = useRouter();
   const { data, mutate } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
@@ -88,7 +90,13 @@ const Items: NextPage = () => {
             <p className='my-6 text-gray-700'>{data?.product?.description}</p>
           </div>
           <div className='flex items-center justify-between space-x-4'>
-            <Button text='Talk to seller' />
+            <Link
+              href={`/chats/${userMe?.user?.id}/${data?.product.id}`}
+              className='w-full'
+            >
+              <Button text='Talk to seller' />
+            </Link>
+
             <button
               onClick={onFavClick}
               className={cls(
