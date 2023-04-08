@@ -5,7 +5,7 @@ import Message from '@/components/message';
 import { Chat, Product, User } from '@prisma/client';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import { ItemDetailResponse } from '../products/[id]';
 import Image from 'next/image';
 import { imageUrl } from '@/libs/client/utils';
@@ -41,10 +41,12 @@ const ChatDetail: NextPage = () => {
       ? `/api/chats/${router.query.id[0]}/${router.query.id[1]}`
       : ''
   );
+
   const { data: chatsData, mutate } = useSWR<ChatsResponse>(
     router.query.id
       ? `/api/chats/${router.query.id[0]}/${router.query.id[1]}`
-      : null
+      : null,
+    { refreshInterval: 3000 } // Refresh every 5 seconds
   );
 
   const [shouldFetchChats, setShouldFetchChats] = useState(false);
