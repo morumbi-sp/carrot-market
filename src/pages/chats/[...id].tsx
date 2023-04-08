@@ -46,7 +46,7 @@ const ChatDetail: NextPage = () => {
     router.query.id
       ? `/api/chats/${router.query.id[0]}/${router.query.id[1]}`
       : null,
-    { refreshInterval: 3000 } // Refresh every 5 seconds
+    { refreshInterval: 2000 } // Refresh every 5 seconds
   );
 
   const [shouldFetchChats, setShouldFetchChats] = useState(false);
